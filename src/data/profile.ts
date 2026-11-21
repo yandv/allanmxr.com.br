@@ -12,7 +12,7 @@ export const profile = {
   region: 'SP',
   email: 'allanmxr@gmail.com',
   links: {
-    linkedin: 'https://www.linkedin.com/in/allan-marcelino-387040244',
+    linkedin: 'https://www.linkedin.com/in/allanmxr',
     github: 'https://github.com/yandv',
     apify: 'https://apify.com/allanmxr',
   },
