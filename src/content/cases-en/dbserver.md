@@ -6,26 +6,17 @@ summary: "Industrial clients such as Randon and Mills needed stable, fast system
 order: 8
 stack: [TypeScript, NestJS, Java, Spring, SQL Server, Azure DevOps, CI/CD, SAP, Keycloak, CQRS]
 resume:
-  - company: DBServer
-    title: Software Engineer
-    location: Remote
-    start: 2023-07
-    end: 2025-12
-    order: 5
-    bullets:
-      - Optimized SQL queries and applied CQRS to Randon's critical APIs, handling more than 50 thousand daily transactions, cutting response time by up to 95%.
-      - Developed NestJS microservices and React frontends integrated with SAP ERP, SAP MII and legacy systems over REST and SOAP.
-      - Refactored Mills monoliths into decoupled services with Java (Spring Boot) and .NET, with CI/CD pipelines on Azure DevOps.
-      - Integrated authentication and authorization with Keycloak and applied SOLID and Clean Architecture to new APIs.
-  - company: DBServer
-    title: Software Engineering Intern
-    location: Remote
-    start: 2022-07
-    end: 2023-07
-    order: 7
-    bullets:
-      - Worked in agile teams for the clients Randon and Mills, fixing production bugs, refactoring and doing code review.
-      - Built features in microservices, relational modeling and SAP integrations through APIs, delivered through CI/CD.
+  company: DBServer
+  title: Software Engineer
+  location: Remote
+  start: 2022-07
+  end: 2025-12
+  order: 5
+  bullets:
+    - Optimized SQL queries and applied CQRS to Randon's critical APIs, handling more than 50 thousand daily transactions, cutting response time by up to 95%.
+    - Developed NestJS microservices and React frontends integrated with SAP ERP, SAP MII and legacy systems over REST and SOAP.
+    - Refactored Mills monoliths into decoupled services with Java (Spring Boot) and .NET, with CI/CD pipelines on Azure DevOps.
+    - Integrated authentication and authorization with Keycloak and applied SOLID and Clean Architecture to new APIs.
 ---
 
 ## What I did
