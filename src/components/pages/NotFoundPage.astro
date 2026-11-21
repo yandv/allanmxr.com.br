@@ -1,0 +1,20 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { ui, type Locale } from '../../i18n/ui';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = ui[locale];
+---
+
+<Layout locale={locale} title={t.notFoundTitle} description={t.notFoundDescription} noindex>
+  <section class="mx-auto max-w-3xl px-4 pt-16 pb-24 sm:px-6 md:pt-24">
+    <p class="font-pixel text-base leading-none text-accent">404</p>
+    <h1 class="mt-4 text-[clamp(2.5rem,8vw,4.5rem)] leading-[0.98] font-extrabold tracking-[-0.035em]">{t.notFoundHeading}</h1>
+    <p class="mt-6 max-w-xl text-lg text-ink-soft">{t.notFoundText}</p>
+    <a href="/" class="text-link mt-8 inline-block">{t.backHome}</a>
+  </section>
+</Layout>

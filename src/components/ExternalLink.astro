@@ -1,0 +1,12 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { ui, type Locale } from '../i18n/ui';
+
+interface Props extends HTMLAttributes<'a'> {
+  locale: Locale;
+}
+
+const { locale, ...attributes } = Astro.props;
+---
+
+<a {...attributes} target="_blank" rel="noopener noreferrer"><slot /><span class="sr-only"> {ui[locale].opensInNewTab}</span></a>

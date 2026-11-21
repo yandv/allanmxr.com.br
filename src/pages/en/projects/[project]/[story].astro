@@ -1,0 +1,11 @@
+---
+import type { InferGetStaticPropsType } from 'astro';
+import StoryPage from '../../../../components/pages/StoryPage.astro';
+import { getStoryPaths } from '../../../../i18n/content';
+
+export const getStaticPaths = () => getStoryPaths('en');
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+---
+
+<StoryPage locale="en" {...Astro.props} />

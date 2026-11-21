@@ -1,0 +1,19 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "allanmxr-com-br",
+  "main": "./worker/index.ts",
+  "compatibility_date": "2026-11-01",
+  "account_id": "12946461f3a2b883702e2421287b606d",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": ["/*", "!/_astro/*"],
+    "html_handling": "drop-trailing-slash",
+    "not_found_handling": "404-page"
+  },
+  "routes": [
+    { "pattern": "allanmxr.com.br", "custom_domain": true },
+    { "pattern": "curriculum.allanmxr.com.br", "custom_domain": true }
+  ],
+  "observability": { "enabled": true }
+}

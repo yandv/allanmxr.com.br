@@ -1,0 +1,14 @@
+degree:
+  pt: Bacharelado em Ciência da Computação
+  en: BSc in Computer Science
+institution: Universidade Federal Rural do Rio de Janeiro (UFRRJ)
+start: 2022
+end: 2025
+thesis:
+  title:
+    pt: 'Aprendizado Contrastivo Hierárquico e Geração de Texto com LLMs: Uma Abordagem para Classificação Interpretativa em Ciências Sociais'
+    en: 'Hierarchical Contrastive Learning and Text Generation with LLMs: An Approach to Interpretive Classification in the Social Sciences'
+  topics:
+    pt: RAG, classificação hierárquica interpretativa e processamento de texto para análise sociológica.
+    en: RAG, hierarchical interpretive classification and text processing for sociological analysis.
+order: 2

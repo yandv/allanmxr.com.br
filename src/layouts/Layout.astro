@@ -1,0 +1,140 @@
+---
+import { Font } from 'astro:assets';
+import '../styles/global.css';
+import { profile } from '../data/profile';
+import { locales, ui, type Locale } from '../i18n/ui';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+  ogType?: 'website' | 'article';
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown>;
+}
+
+const { locale, title, description, ogType = 'website', noindex = false, jsonLd } = Astro.props;
+const t = ui[locale];
+const canonical = new URL(Astro.url.pathname.replace(/(index)?\.html$/, '').replace(/^\/en(?=\/|$)/, '') || '/', Astro.site);
+const ogImageUrl = new URL('/og.png', Astro.site);
+const metaDescription = description.length > 160 ? `${description.slice(0, 159).replace(/\s\S*$/, '').replace(/[,;:.]$/, '')}…` : description;
+---
+
+<!doctype html>
+<html lang={t.htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <Font cssVariable="--font-funnel-sans" preload />
+    <Font cssVariable="--font-funnel-display" preload />
+    <Font cssVariable="--font-silkscreen" />
+    <meta name="description" content={metaDescription} />
+    {noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <meta name="theme-color" content="#f2f5ef" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0d261d" media="(prefers-color-scheme: dark)" />
+    <meta name="author" content={profile.name} />
+
+    <meta property="og:type" content={ogType} />
+    <meta property="og:locale" content={t.ogLocale} />
+    <meta property="og:site_name" content={profile.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {!noindex && <meta property="og:url" content={canonical} />}
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={t.ogImageAlt} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={t.ogImageAlt} />
+
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
+
+    <script is:inline>
+      try {
+        const saved = localStorage.getItem('theme');
+        if (saved === 'light' || saved === 'dark') document.documentElement.dataset.theme = saved;
+      } catch {}
+    </script>
+  </head>
+  <body class="min-h-dvh antialiased">
+    <a href="#content" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:rounded-lg focus:bg-xp focus:px-3 focus:py-2 focus:text-on-xp">{t.skipToContent}</a>
+
+    <header class="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-5 sm:px-6">
+      <a href="/" class="flex items-center gap-2.5 font-display text-xl font-bold tracking-tight">
+        <span class="size-3 rounded-[3px] bg-accent" aria-hidden="true"></span>allanmxr<span class="sr-only">, {t.home}</span>
+      </a>
+      <div class="flex items-center gap-1 sm:gap-2">
+        <nav class="flex items-center gap-1 sm:gap-2" aria-label={t.mainNav}>
+          <a href="/#projects" class="hidden rounded-lg px-3 py-1.5 hover:bg-surface md:inline">{t.navProjects}</a>
+          <a href="/#journey" class="hidden rounded-lg px-3 py-1.5 hover:bg-surface md:inline">{t.navJourney}</a>
+          <a href="/resume" class="rounded-lg px-2.5 py-1.5 hover:bg-surface sm:px-3">{t.navResume}</a>
+          <a href="/#contact" class="hidden rounded-lg px-3 py-1.5 hover:bg-surface sm:inline">{t.navContact}</a>
+        </nav>
+        <nav class="flex items-center rounded-lg border border-line p-0.5 text-sm font-semibold" aria-label={t.languageNav}>
+          {locales.map((code) => (
+            <a
+              href={`?lang=${code}`}
+              hreflang={ui[code].htmlLang}
+              lang={ui[code].htmlLang}
+              aria-current={code === locale ? 'true' : undefined}
+              class="rounded-md px-2 py-1.5 leading-none text-ink-soft hover:text-ink aria-[current]:bg-cta aria-[current]:text-on-cta"
+            >
+              {ui[code].languageShort}<span class="sr-only"> {ui[code].languageName}</span>
+            </a>
+          ))}
+        </nav>
+        <button
+          type="button"
+          id="theme-toggle"
+          class="grid size-10 place-items-center rounded-lg border border-line hover:bg-surface"
+          aria-label={t.darkTheme}
+          aria-pressed="false"
+        >
+          <svg viewBox="0 0 24 24" class="size-4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <path class="theme-icon-moon" d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9Z" />
+            <g class="theme-icon-sun">
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4m0-14.2-1.4 1.4M6.3 17.7l-1.4 1.4" />
+            </g>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <main id="content">
+      <slot />
+    </main>
+
+    <footer class="mx-auto max-w-6xl px-4 py-10 text-sm text-ink-soft sm:px-6">
+      <p>{t.footer(new Date().getFullYear(), profile.name)}</p>
+    </footer>
+
+    <script>
+      const root = document.documentElement;
+      const toggle = document.getElementById('theme-toggle');
+      const systemDark = matchMedia('(prefers-color-scheme: dark)');
+      const isDark = () => (root.dataset.theme ? root.dataset.theme === 'dark' : systemDark.matches);
+      const syncToggle = () => toggle?.setAttribute('aria-pressed', String(isDark()));
+
+      syncToggle();
+      systemDark.addEventListener('change', syncToggle);
+      toggle?.addEventListener('click', () => {
+        const next = isDark() ? 'light' : 'dark';
+        root.dataset.theme = next;
+        syncToggle();
+        try {
+          localStorage.setItem('theme', next);
+        } catch {}
+      });
+    </script>
+  </body>
+</html>

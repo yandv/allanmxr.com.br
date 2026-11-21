@@ -1,0 +1,11 @@
+---
+import type { InferGetStaticPropsType } from 'astro';
+import CasePage from '../../components/pages/CasePage.astro';
+import { getCasePaths } from '../../i18n/content';
+
+export const getStaticPaths = () => getCasePaths('pt');
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+---
+
+<CasePage locale="pt" {...Astro.props} />
